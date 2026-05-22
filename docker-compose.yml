@@ -121,6 +121,7 @@ services:
       - "coolify.managed=true"
       - "coolify.proxy.domains=suguai-api.dds-mali.com"
     command: python main.py
+ 
   # --- NEXT.JS DASHBOARD FRONTEND ---
   suguai-frontend:
     build:
