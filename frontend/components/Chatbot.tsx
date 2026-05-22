@@ -89,14 +89,14 @@ export default function Chatbot() {
 
           {/* Chat area */}
           <div ref={scrollRef} style={{ flex: 1, padding: '15px', overflowY: 'auto', backgroundColor: '#fdfdfd', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {messages.map((m, i) => (
-              <div key={i} style={{ alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '85%' }}>
-                <div style={{
-                  padding: '10px 14px', borderRadius: '15px', fontSize: '13px', lineHeight: '1.4',
-                  backgroundColor: m.role === 'user' ? '#D4AF37' : '#f0f0f0',
-                  color: m.role === 'user' ? 'white' : '#1B4332',
-                  borderRadius: m.role === 'user' ? '15px 15px 0 15px' : '0 15px 15px 15px'
-                }}>
+  {messages.map((m, i) => (
+    <div key={i} style={{ alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '85%' }}>
+      <div style={{
+        padding: '10px 14px', fontSize: '13px', lineHeight: '1.4', // <-- Removed static borderRadius here
+        backgroundColor: m.role === 'user' ? '#D4AF37' : '#f0f0f0',
+        color: m.role === 'user' ? 'white' : '#1B4332',
+        borderRadius: m.role === 'user' ? '15px 15px 0 15px' : '0 15px 15px 15px'
+      }}>
                   {m.content}
                 </div>
               </div>
