@@ -15,8 +15,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Set the production backend API URL flag for Next.js compilation
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_API_URL=https://suguai-api.dds-mali.com
+
 
 RUN npm run build
 
