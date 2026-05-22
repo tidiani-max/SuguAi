@@ -1,0 +1,146 @@
+version: "3.8"
+
+networks:
+  coolify-traffic:
+    external: true
+
+services:
+  # --- SUGUAI MAIN SYSTEM DATABASES ---
+  suguai-db:
+    image: postgres:15-alpine
+    container_name: suguai-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: saas_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: whatsapp_saas
+    volumes:
+      - suguai_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U saas_user -d whatsapp_saas"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  suguai-redis:
+    image: redis:7-alpine
+    container_name: suguai-redis
+    restart: always
+    volumes:
+      - suguai_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # --- EVOLUTION API WHATSAPP INSTANCE & STORAGE ---
+  evolution-api:
+    image: evoapicloud/evolution-api:v2.3.7
+    container_name: suguai-evolution-engine
+    restart: always
+    depends_on:
+      suguai-db:
+        condition: service_healthy
+      suguai-redis:
+        condition: service_healthy
+    environment:
+      - SERVER_URL=https://suguai-wa.dds-mali.com
+      - AUTHENTICATION_TYPE=apikey
+      - AUTHENTICATION_API_KEY=${EVOLUTION_API_KEY}
+      - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
+      - DEL_INSTANCE=false
+      - LOG_LEVEL=INFO
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1015901307
+      - NODE_OPTIONS=--network-family-autoselection-attempt-timeout=1000
+      - DATABASE_ENABLED=true
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://saas_user:${DB_PASSWORD}@suguai-db:5432/whatsapp_saas
+      - DATABASE_SAVE_DATA_INSTANCE=true
+      - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+      - DATABASE_SAVE_DATA_CONTACTS=true
+      - DATABASE_SAVE_DATA_CHATS=true
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://suguai-redis:6379
+      - CACHE_REDIS_PREFIX_KEY=evolution
+      - CACHE_LOCAL_ENABLED=false
+      - WEBSOCKET_ENABLED=true
+      - WEBSOCKET_GLOBAL_EVENTS=false
+      - QRCODE_LIMIT=30
+    volumes:
+      - suguai_ev_instances:/evolution/instances
+      - suguai_ev_store:/evolution/store
+    networks:
+      - default
+      - coolify-traffic
+    labels:
+      - "coolify.managed=true"
+      - "coolify.proxy.domains=suguai-wa.dds-mali.com"
+
+  # --- FASTAPI BACKEND APP ---
+  suguai-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: suguai-backend-api
+    restart: always
+    depends_on:
+      suguai-db:
+        condition: service_healthy
+      suguai-redis:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://saas_user:${DB_PASSWORD}@suguai-db:5432/whatsapp_saas
+      - SYNC_DATABASE_URL=postgresql://saas_user:${DB_PASSWORD}@suguai-db:5432/whatsapp_saas
+      - REDIS_URL=redis://suguai-redis:6379/0
+      - EVOLUTION_API_URL=http://evolution-api:8080
+      - EVOLUTION_API_KEY=${EVOLUTION_API_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - ALGORITHM=HS256
+      - ENVIRONMENT=production
+      - BACKEND_URL=https://suguai-api.dds-mali.com
+      - FRONTEND_URL=https://suguai.dds-mali.com
+      - ADMIN_SECRET_KEY=${ADMIN_SECRET_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DJELIA_API_KEY=${DJELIA_API_KEY}
+      - DBUDDYZ_TOKEN=${DBUDDYZ_TOKEN}
+      - OTP_EVOLUTION_INSTANCE=suguai-otp
+      - META_APP_ID=${META_APP_ID}
+      - META_APP_SECRET=${META_APP_SECRET}
+      - META_VERIFY_TOKEN=${META_VERIFY_TOKEN}
+      - WHATSAPP_PHONE_NUMBER_ID=${WHATSAPP_PHONE_NUMBER_ID}
+      - WHATSAPP_ACCESS_TOKEN=${WHATSAPP_ACCESS_TOKEN}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_WHATSAPP_NUMBER=${TWILIO_WHATSAPP_NUMBER}
+    networks:
+      - default
+      - coolify-traffic
+    labels:
+      - "coolify.managed=true"
+      - "coolify.proxy.domains=suguai-api.dds-mali.com"
+
+  # --- NEXT.JS DASHBOARD FRONTEND ---
+  suguai-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=https://suguai-api.dds-mali.com
+    container_name: suguai-frontend-dashboard
+    restart: always
+    depends_on:
+      - suguai-backend
+    networks:
+      - default
+      - coolify-traffic
+    labels:
+      - "coolify.managed=true"
+      - "coolify.proxy.domains=suguai.dds-mali.com"
+
+volumes:
+  suguai_pg_data:
+  suguai_redis_data:
+  suguai_ev_instances:
+  suguai_ev_store:

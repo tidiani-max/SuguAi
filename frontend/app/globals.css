@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Updated to match Landing Page Colors */
+  --bg: #f9fafb;        /* Light grey background like the landing page */
+  --surface: #ffffff;   /* White cards */
+  --surface2: #f3f4f6;
+  --border: #e5e7eb;    /* Subtle border */
+  --accent: #c5a034;    /* SUGU AI GOLD */
+  --accent-dim: #b08d2a;
+  --text: #1a2e21;      /* Dark green/black text */
+  --text-muted: #6b7280;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+  --info: #2563eb;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar to match the clean design */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 10px; }
+
+/* 
+   ==========================================================================
+   FORCE HIDE NEXT.JS DEV INDICATOR (The "N" sign)
+   ==========================================================================
+*/
+nextjs-portal,
+#nxt-static-indicator,
+.__next-static-indicator-wrapper,
+[data-nextjs-toast-wrapper],
+[data-nextjs-static-indicator] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}

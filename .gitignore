@@ -1,0 +1,35 @@
+# Environments & Secrets
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+ENV/
+env/
+venv/
+.venv/
+vinst/
+
+# Python caching & artifacts
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.poetry.lock
+poetry.lock
+
+# System & IDEs
+.DS_Store
+**/.DS_Store
+.vscode/
+**/.vscode/
+.idea/
+**/.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Databases
+*.sqlite3
