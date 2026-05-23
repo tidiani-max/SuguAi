@@ -132,7 +132,8 @@ services:
     container_name: suguai-frontend-dashboard
     restart: always
     depends_on:
-      - suguai-backend
+      suguai-backend:
+        condition: service_started
     networks:
       - default
       - coolify-traffic
