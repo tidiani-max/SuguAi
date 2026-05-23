@@ -87,8 +87,6 @@ services:
       dockerfile: Dockerfile
     container_name: suguai-backend-api
     restart: always
-    ports:
-      - "8000:8000"  
     depends_on:
       suguai-db:
         condition: service_healthy
