@@ -83,7 +83,6 @@ services:
       - "traefik.http.routers.evolution-api.rule=Host(`suguai-wa.dds-mali.com`)"
       - "traefik.http.routers.evolution-api.entrypoints=https"
       - "traefik.http.routers.evolution-api.tls=true"
-      - "traefik.http.routers.evolution-api.tls.certresolver=letsencrypt"
       - "traefik.http.services.evolution-api.loadbalancer.server.port=8080"
 
   suguai-backend:
@@ -131,7 +130,6 @@ services:
       - "traefik.http.routers.suguai-backend.rule=Host(`suguai-api.dds-mali.com`)"
       - "traefik.http.routers.suguai-backend.entrypoints=https"
       - "traefik.http.routers.suguai-backend.tls=true"
-      - "traefik.http.routers.suguai-backend.tls.certresolver=letsencrypt"
       - "traefik.http.services.suguai-backend.loadbalancer.server.port=8000"
 
   suguai-frontend:
@@ -154,7 +152,6 @@ services:
       - "traefik.http.routers.suguai-frontend.rule=Host(`suguai.dds-mali.com`)"
       - "traefik.http.routers.suguai-frontend.entrypoints=https"
       - "traefik.http.routers.suguai-frontend.tls=true"
-      - "traefik.http.routers.suguai-frontend.tls.certresolver=letsencrypt"
       - "traefik.http.services.suguai-frontend.loadbalancer.server.port=3000"
 
 volumes:
