@@ -45,7 +45,11 @@ def _resolve_model() -> str:
         return "claude-3-haiku-20240307"
 
 
-MODEL = _resolve_model()
+try:
+    MODEL = _resolve_model()
+except Exception:
+    MODEL = "claude-haiku-4-5-20251001"
+    logger.warning("Could not resolve model, using fallback.")
 
 
 # ── Shared language / format blocks ──────────────────────────────────────────

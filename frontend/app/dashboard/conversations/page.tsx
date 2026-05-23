@@ -91,7 +91,7 @@ export default function ConversationsPage() {
               >
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
                   <span style={{ fontWeight: 700, fontSize: "14px", color: "#111827" }}>
-                    +{c.customer_name || c.customer_phone?.split('@')[0] || "Client"}
+                    +{(c as any).customer_name || (c as any).customer_phone?.split('@')[0] || "Client"}
                   </span>
                   <span style={{ fontSize: "10px", color: "#9CA3AF" }}>
                     {new Date(c.last_message_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -121,10 +121,10 @@ export default function ConversationsPage() {
               {/* Chat Header */}
               <div style={{ padding: "16px 24px", borderBottom: "1px solid #F3F4F6", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
-                  <h3 style={{ fontWeight: 800, fontSize: "16px", color: "#1B4332" }}>
-                    {selected.customer_name || "Client WhatsApp"}
-                  </h3>
-                  <span style={{ fontSize: "12px", color: "#6B7280" }}>+{selected.customer_phone?.split('@')[0]}</span>
+                 <h3>
+  {(selected as any).customer_name || "Client WhatsApp"}
+</h3>
+<span style={{ fontSize: "12px", color: "#6B7280" }}>+{(selected as any).customer_phone?.split('@')[0]}</span>
                 </div>
                 <button 
                   onClick={toggleAI}

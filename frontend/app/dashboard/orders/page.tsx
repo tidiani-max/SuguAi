@@ -278,7 +278,7 @@ function DetailPanel({ order, business, vocab, logoDataUrl, onClose, onMarkPaid,
 
   // Override shipped label with type-specific one
   const fulfillmentStatusOverridden = { ...FULFILLMENT_STATUS, shipped: { ...FULFILLMENT_STATUS.shipped, label: vocab.shippedLabel } };
-  const ffLabel = fulfillmentStatusOverridden[order.status]?.label || ff.label;
+  const ffLabel = (fulfillmentStatusOverridden as any)[order.status]?.label || ff.label;
 
   return (
     <div style={{ width:390, flexShrink:0, background:C.white, border:`1px solid ${C.border}`, borderRadius:20, boxShadow:"0 8px 32px rgba(0,0,0,0.08)", position:"sticky", top:20, display:"flex", flexDirection:"column", overflow:"hidden", maxHeight:"calc(100vh - 40px)" }}>
@@ -418,7 +418,7 @@ function DetailPanel({ order, business, vocab, logoDataUrl, onClose, onMarkPaid,
             <select value={order.status} disabled={updating===order.id} onChange={(e) => onStatusChange(order.id,e.target.value)}
               style={{ width:"100%", padding:"11px 14px", borderRadius:10, border:`1px solid ${C.border}`, background:C.white, fontSize:14, cursor:"pointer", outline:"none", color:C.text, fontWeight:600 }}>
               {FULFILLMENT_OPTIONS.map((v) => (
-                <option key={v} value={v}>{fulfillmentStatusOverridden[v]?.label || FULFILLMENT_STATUS[v].label}</option>
+                <option key={v} value={v}>{(fulfillmentStatusOverridden as any)[v]?.label || (FULFILLMENT_STATUS as any)[v].label}</option>
               ))}
             </select>
           </div>

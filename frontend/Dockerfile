@@ -18,7 +18,7 @@ COPY . .
 ENV NEXT_PUBLIC_API_URL=https://suguai-api.dds-mali.com
 
 
-RUN npm run build
+RUN npm run build || (echo "=== NEXTJS BUILD FAILED ===" && cat /app/.next/error.log || true && exit 1)
 
 # Production image, copy all the files and run next
 FROM base AS runner
