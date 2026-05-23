@@ -120,7 +120,7 @@ services:
     labels:
       - "coolify.managed=true"
       - "coolify.proxy.domains=suguai-api.dds-mali.com"
-    command: /root/.local/bin/poetry run python -m app.main
+    command: poetry run python -m app.main
  
   # --- NEXT.JS DASHBOARD FRONTEND ---
   suguai-frontend:
