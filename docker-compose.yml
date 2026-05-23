@@ -5,7 +5,6 @@ networks:
     external: true
 
 services:
-  # --- SUGUAI MAIN SYSTEM DATABASES ---
   suguai-db:
     image: postgres:15-alpine
     container_name: suguai-postgres
@@ -16,6 +15,9 @@ services:
       POSTGRES_DB: whatsapp_saas
     volumes:
       - suguai_pg_data:/var/lib/postgresql/data
+    networks:
+      - default
+      - coolify-traffic
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U saas_user -d whatsapp_saas"]
       interval: 5s
@@ -28,13 +30,15 @@ services:
     restart: always
     volumes:
       - suguai_redis_data:/data
+    networks:
+      - default
+      - coolify-traffic
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
       timeout: 5s
       retries: 10
 
-  # --- EVOLUTION API WHATSAPP INSTANCE & STORAGE ---
   evolution-api:
     image: evoapicloud/evolution-api:v2.3.7
     container_name: suguai-evolution-engine
@@ -77,7 +81,6 @@ services:
       - "coolify.managed=true"
       - "coolify.proxy.domains=suguai-wa.dds-mali.com"
 
-  # --- FASTAPI BACKEND APP ---
   suguai-backend:
     build:
       context: ./backend
@@ -120,9 +123,7 @@ services:
     labels:
       - "coolify.managed=true"
       - "coolify.proxy.domains=suguai-api.dds-mali.com"
-    command: ["python", "-m", "app.main"]
- 
-  # --- NEXT.JS DASHBOARD FRONTEND ---
+
   suguai-frontend:
     build:
       context: ./frontend
