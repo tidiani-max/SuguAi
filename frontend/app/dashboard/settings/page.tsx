@@ -93,12 +93,12 @@ function WhatsAppSection({ business, onReload }: { business: Business; onReload:
           const data = JSON.parse(event.data);
           if (data.qrcode?.base64 || data.base64) { setQrCode(data.qrcode?.base64 || data.base64); setPhase("qr"); return; }
           if (data.state === "connecting") { setPhase("connecting"); return; }
-          if (data.state === "open") { closeWs(); setQrCode(null); setPhase("connected"); toast.success("✅ WhatsApp connecté avec succès !"); onReload(); return; }
+          if (data.state === "open") { setPhase("connected"); setQrCode(null); toast.success("✅ WhatsApp connecté avec succès !"); onReload(); closeWs(); return; }
           if (data.error) { closeWs(); setPhase("error"); setErrorMsg(data.error); }
         } catch {}
       };
       ws.onerror = () => { closeWs(); setPhase("error"); setErrorMsg("Connexion WebSocket perdue — réessayez."); };
-      ws.onclose = (e) => { if (e.code !== 1000 && e.code !== 1001 && phase !== "connected") { setPhase(p => p === "connected" ? p : "error"); setErrorMsg("Connexion interrompue — réessayez."); } };
+      ws.onclose = (e) => { if (e.code !== 1000 && e.code !== 1001) { setPhase(p => p === "connected" ? p : "error"); } };
     } catch (err: any) {
       setPhase("error"); setErrorMsg(err?.response?.data?.detail || "Erreur réseau — réessayez.");
       toast.error("Impossible de lancer la connexion WhatsApp");
