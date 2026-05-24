@@ -16,7 +16,7 @@ COPY . .
 
 # Set the production backend API URL flag for Next.js compilation
 ENV NEXT_PUBLIC_API_URL=https://suguai-api.dds-mali.com
-
+ENV NEXT_PUBLIC_BACKEND_URL=https://suguai-api.dds-mali.com
 
 RUN npm run build || (echo "=== NEXTJS BUILD FAILED ===" && cat /app/.next/error.log || true && exit 1)
 
