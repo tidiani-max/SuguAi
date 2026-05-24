@@ -138,6 +138,7 @@ services:
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_API_URL=https://suguai-api.dds-mali.com
+        - NEXT_PUBLIC_BACKEND_URL=https://suguai-api.dds-mali.com
     container_name: suguai-frontend-dashboard
     restart: always
     depends_on:
