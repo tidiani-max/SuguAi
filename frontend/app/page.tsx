@@ -811,7 +811,7 @@ export default function Page() {
             <circle cx="82" cy="46" r="10" fill="none" stroke="#c9a227" strokeWidth="3"/>
             <path d="M77 46 L80 49 L87 42" fill="none" stroke="#c9a227" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-          <span className="logo-text">IntaraSales<span>AI</span></span>
+          <span className="logo-text">Sugu<span>AI</span></span>
         </div>
         <ul>
           <li><a href="#accueil">Accueil</a></li>
