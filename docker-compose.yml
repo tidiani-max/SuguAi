@@ -108,6 +108,7 @@ services:
       - ENVIRONMENT=production
       - BACKEND_URL=https://suguai-api.dds-mali.com
       - FRONTEND_URL=https://suguai.dds-mali.com
+      - BASE_URL=https://suguai-api.dds-mali.com
       - ADMIN_SECRET_KEY=${ADMIN_SECRET_KEY}
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       - DJELIA_API_KEY=${DJELIA_API_KEY}
@@ -162,3 +163,4 @@ volumes:
   suguai_redis_data:
   suguai_ev_instances:
   suguai_ev_store:
+  suguai_uploads:
