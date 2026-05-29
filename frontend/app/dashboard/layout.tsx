@@ -314,7 +314,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <div className="sidebar-logo">
             {/* <Image src="/logo.jpeg" alt="Logo" width={38} height={38} style={{ borderRadius: "8px" }} /> */}
             
-            <h2>IntaraSales<span> AI</span></h2>
+            <h2>Sugu<span> AI</span></h2>
           </div>
 
           <div className="biz-badge">
