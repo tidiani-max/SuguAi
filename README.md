@@ -1,132 +1,84 @@
-# 🌍 SuguAI
+<div align="center">
+  <h1>🌍 SuguAI</h1>
+  <p>
+    <strong>Voice-First Multilingual AI Commerce Assistant for African Merchants</strong>
+  </p>
+  <p>
+    Enabling merchants in Mali to sell, manage inventory, and grow their businesses on <strong>WhatsApp</strong> using natural voice and text conversations in <strong>Bambara</strong> and <strong>French</strong>.
+  </p>
 
-> An AI-powered business assistant that enables merchants in Mali to sell, manage, and grow their businesses using WhatsApp and natural voice conversations in Bambara and French.
+  <p>
+    <img src="https://img.shields.io/badge/Languages-Bambara%20%7C%20French-009639?style=for-the-badge" alt="Languages" />
+    <img src="https://img.shields.io/badge/Channel-WhatsApp%20Business-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp" />
+    <img src="https://img.shields.io/badge/Backend-FastAPI%20%7C%20PostgreSQL%20%7C%20Redis-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="Backend" />
+    <img src="https://img.shields.io/badge/Frontend-Next.js%20%7C%20TypeScript-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Frontend" />
+    <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License" />
+  </p>
+</div>
 
-SuguAI is an intelligent conversational AI platform built specifically for African businesses. It allows merchants to communicate with customers, manage sales, and monitor their business entirely through WhatsApp using voice or text.
+---
 
-Designed for regions with low digital literacy, SuguAI removes technology barriers by allowing business owners to interact with AI naturally in their local language.
+## 📖 Overview
+
+**SuguAI** is an intelligent conversational AI commerce platform built specifically for small and medium businesses across Mali and West Africa. Designed for environments with varying levels of digital literacy, SuguAI removes technical barriers by allowing business owners to manage daily operations simply by speaking in their native language—no complex dashboards or typing required.
+
+> Instead of learning complicated software, merchants simply talk to SuguAI on WhatsApp just like they would talk to a trusted store employee.
 
 ---
 
 ## 🌟 Why SuguAI?
 
-Many small businesses in Mali receive dozens of WhatsApp messages every day but cannot respond quickly enough. Others struggle with digital tools because they are not comfortable reading or writing.
+Many small merchants in Mali receive dozens of WhatsApp inquiries every day that go unanswered during busy hours, while traditional POS and ERP software often require reading, typing, or technical training.
 
-SuguAI solves this by allowing merchants to:
-
-- 💬 Reply automatically to customer messages
-- 🎤 Speak naturally in Bambara or French
-- 📦 Manage products and inventory using voice
-- 📈 Check daily sales and revenue
-- 👥 Track customer orders
-- 🤖 Let AI answer customers 24/7
-
-Instead of learning complicated software, business owners simply talk to SuguAI like they would talk to an employee.
+| Challenge | How SuguAI Solves It |
+| :--- | :--- |
+| **Missed Customer Messages** | Responds automatically to buyer inquiries on WhatsApp **24/7** |
+| **Literacy & Typing Barriers** | Custom **Bambara & French speech-to-text** enables pure voice interaction |
+| **Manual Stock & Sales Tracking** | Merchants add products, log sales, and check daily revenue via voice notes |
+| **Complex Software Overhead** | Works natively inside WhatsApp alongside a clean web dashboard for deeper analytics |
 
 ---
 
-# ✨ Features
+## ✨ Key Features
 
-- 🤖 AI-powered WhatsApp assistant
-- 🗣 Voice-first experience
-- 🇲🇱 Bambara language support
-- 🇫🇷 French language support
-- 📱 WhatsApp Business integration
-- 📦 Product management
-- 🛒 Order management
-- 👥 Customer management
-- 📊 Sales analytics
-- 🔔 Smart notifications
-- ☁ Cloud-based platform
+- 🗣️ **Voice-First Bambara & French AI** — Custom speech recognition and multilingual NLP tailored for low-resource West African speech patterns
+- 🤖 **24/7 WhatsApp Customer Assistant** — Answers product questions, shares prices, and captures orders automatically
+- 📦 **Voice Inventory & Product Management** — Add, update, and check stock levels through natural voice messages
+- 🛒 **Automated Order & Customer Tracking** — Logs orders, tracks fulfillment status, and organizes customer history
+- 📊 **Sales Analytics & Revenue Summaries** — Instant daily/weekly performance reports via WhatsApp or the web dashboard
+- 🧾 **Receipt & Document OCR** — Extracts product and transaction details from photos of invoices or handwritten notes
+- 🔔 **Smart Business Alerts** — Real-time notifications for new orders, low inventory, and daily summaries
 
 ---
 
-# 🏗 How It Works
+## 🏗️ System Architecture
 
 ```text
-Business Owner
-      │
-      ▼
-WhatsApp Voice or Text
-      │
-      ▼
-      SuguAI
-      │
- ┌────┴─────────────┐
- │                  │
- ▼                  ▼
-AI Conversation   Business Management
-Engine            System
- │                  │
- └──────────┬───────┘
-            ▼
- Dashboard & Analytics
-```
-
----
-
-# 🌍 Built for Mali
-
-SuguAI is designed with local businesses in mind.
-
-It helps merchants who:
-
-- Have limited digital experience
-- Prefer speaking instead of typing
-- Operate entirely through WhatsApp
-- Need customer support outside business hours
-- Want an affordable AI employee
-
----
-
-# 🛠 Technology
-
-### Backend
-
-- Python
-- FastAPI
-- PostgreSQL
-- Redis
-- Docker
-- Speech Recognition
-- Large Language Models (LLMs)
-
-### Frontend
-
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-
-### Integrations
-
-- WhatsApp Business API
-- Voice Processing
-- OCR
-- AI Automation
-
----
-
-# 📸 Screenshots
-
-Coming soon
-
-- Landing Page
-- WhatsApp Conversation
-- Merchant Dashboard
-- Analytics
-- Product Management
-
----
-
-# 🚀 Vision
-
-Our mission is to make artificial intelligence accessible to every small business in Africa, regardless of literacy level or technical knowledge.
-
-By combining local languages, voice interaction, and AI automation, SuguAI empowers entrepreneurs to focus on growing their businesses while AI handles customer communication.
-
----
-
-# 📄 License
-
-MIT License
+                      ┌─────────────────────────┐
+                      │  Merchant / Customer    │
+                      │ (WhatsApp Voice & Text) │
+                      └────────────┬────────────┘
+                                   │
+                                   ▼
+                      ┌─────────────────────────┐
+                      │  WhatsApp Business API  │
+                      └────────────┬────────────┘
+                                   │
+                                   ▼
+┌─────────────────────────────────────────────────────────────────────┐
+│                        SuguAI Core (FastAPI)                        │
+│                                                                     │
+│  ┌───────────────────────────┐     ┌─────────────────────────────┐  │
+│  │  Speech & AI Engine       │     │  Commerce & Operations      │  │
+│  │  • Bambara / French ASR   │────▶│  • Product & Stock Service  │  │
+│  │  • Intent & LLM Reasoning │     │  • Order & CRM Engine       │  │
+│  │  • OCR Document Parser    │     │  • Analytics & Alerts       │  │
+│  └───────────────────────────┘     └──────────────┬──────────────┘  │
+└───────────────────────────────────────────────────┼─────────────────┘
+                                                    │
+                       ┌────────────────────────────┼────────────────┐
+                       ▼                            ▼                ▼
+             ┌──────────────────┐         ┌──────────────────┐  ┌──────────────────┐
+             │    PostgreSQL    │         │      Redis       │  │ Next.js Web App  │
+             │  (Core Storage)  │         │ (Cache & Queues) │  │   (Dashboard)    │
+             └──────────────────┘         └──────────────────┘  └──────────────────┘
